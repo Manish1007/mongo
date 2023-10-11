@@ -1,0 +1,234 @@
+//demonstration data is my assumption only
+//cricket is my taken sport in this assignment
+
+use cricket
+switched to db cricket
+db.createCollection("player")
+{ ok: 1 }
+db.player.insertMany([
+
+	{
+		"Name":"virat kohli",
+		"Age":34,
+		"Centuries":77,
+		"Half centuries":125,
+		"Total score":23452
+
+	},
+
+	{
+		"Name":"rohit sharma",
+		"Age":35,
+		"Centuries":55,
+		"Half centuries":133,
+		"Total score":16895
+
+	},
+
+	{
+		"Name":"shikhar dhawan",
+		"Age":40,
+		"Centuries":17,
+		"Half centuries":44,
+		"Total score":12893
+
+	},
+
+	{
+		"Name":"david warner",
+		"Age":38,
+		"Centuries":48,
+		"Half centuries":83,
+		"Total score":18479
+
+	},
+
+	{
+		"Name":"steve smith",
+		"Age":42,
+		"Centuries":48,
+		"Half centuries":79,
+		"Total score":13219
+
+	},
+
+	{
+		"Name":"chris gayle",
+		"Age":48,
+		"Centuries":57,
+		"Half centuries":77,
+		"Total score":16478
+	},
+
+	{
+		"Name":"ms dhoni",
+		"Age":39,
+		"Centuries":36,
+		"Half centuries":39,
+		"Total score":11984
+
+	},
+
+	{
+		"Name":"surya kumar yadav",
+		"Age":28,
+		"Centuries":7,
+		"Half centuries":12,
+		"Total score":3422
+
+	},
+
+	{
+		"Name":"sachin tendulukar",
+		"Age":55,
+		"Centuries":101,
+		"Half centuries":198,
+		"Total score":32896
+
+	},
+
+	{
+		"Name":"williamson",
+		"Age":36,
+		"Centuries":35,
+		"Half centuries":53,
+		"Total score":8945
+
+	},
+
+	{
+		"Name":"ben stocks",
+		"Age":33,
+		"Centuries":29,
+		"Half centuries":58,
+		"Total score":7693
+
+	},
+
+	{
+		"Name":"quenton decock",
+		"Age":26,
+		"Centuries":11,
+		"Half centuries":32,
+		"Total score":6783
+
+	},
+
+	{
+		"Name":"babar azam",
+		"Age":34,
+		"Centuries":54,
+		"Half centuries":98,
+		"Total score":10903
+
+	},
+
+	{
+		"Name":"sangakara",
+		"Age":53,
+		"Centuries":51,
+		"Half centuries":192,
+		"Total score":5678
+
+	},
+
+	{
+		"Name":"ricky ponting",
+		"Age":58,
+		"Centuries":59,
+		"Half centuries":135,
+		"Total score":21789
+
+	}
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6526fec1cf5244107a0dfbfd"),
+    '1': ObjectId("6526fec1cf5244107a0dfbfe"),
+    '2': ObjectId("6526fec1cf5244107a0dfbff"),
+    '3': ObjectId("6526fec1cf5244107a0dfc00"),
+    '4': ObjectId("6526fec1cf5244107a0dfc01"),
+    '5': ObjectId("6526fec1cf5244107a0dfc02"),
+    '6': ObjectId("6526fec1cf5244107a0dfc03"),
+    '7': ObjectId("6526fec1cf5244107a0dfc04"),
+    '8': ObjectId("6526fec1cf5244107a0dfc05"),
+    '9': ObjectId("6526fec1cf5244107a0dfc06"),
+    '10': ObjectId("6526fec1cf5244107a0dfc07"),
+    '11': ObjectId("6526fec1cf5244107a0dfc08"),
+    '12': ObjectId("6526fec1cf5244107a0dfc09"),
+    '13': ObjectId("6526fec1cf5244107a0dfc0a"),
+    '14': ObjectId("6526fec1cf5244107a0dfc0b")
+  }
+}
+
+//1. To find a player at age 35
+db.player.find({"Age":35})
+{
+  _id: ObjectId("6526fec1cf5244107a0dfbfe"),
+  Name: 'rohit sharma',
+  Age: 35,
+  Centuries: 55,
+  'Half centuries': 133,
+  'Total score': 16895
+}
+
+//2. To find a player who is at age greater than and equal to 55.
+db.player.find({"Age":{$gte:55}})
+{
+  _id: ObjectId("6526fec1cf5244107a0dfc05"),
+  Name: 'sachin tendulukar',
+  Age: 55,
+  Centuries: 101,
+  'Half centuries': 198,
+  'Total score': 32896
+}
+{
+  _id: ObjectId("6526fec1cf5244107a0dfc0b"),
+  Name: 'ricky ponting',
+  Age: 58,
+  Centuries: 59,
+  'Half centuries': 135,
+  'Total score': 21789
+}
+
+//3. Lowest total score
+db.player.find (). sort ({"Total score":1}).limit(1)
+{
+  _id: ObjectId("6526fec1cf5244107a0dfc04"),
+  Name: 'surya kumar yadav',
+  Age: 28,
+  Centuries: 7,
+  'Half centuries': 12,
+  'Total score': 3422
+}
+
+//4. Highest total score
+db.player.find().sort({"Total score":-1}).limit(1)
+{
+  _id: ObjectId("6526fec1cf5244107a0dfc05"),
+  Name: 'sachin tendulukar',
+  Age: 55,
+  Centuries: 101,
+  'Half centuries': 198,
+  'Total score': 32896
+}
+
+//5. Update Data
+db.player.updateOne ({"Name":"virat kohli"},{$set: {"Age":36,"Centuries":80}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.player.find({"Name":"virat kohli"})
+{
+  _id: ObjectId("6526fec1cf5244107a0dfbfd"),
+  Name: 'virat kohli',
+  Age: 36,
+  Centuries: 80,
+  'Half centuries': 125,
+  'Total score': 23452
+}
